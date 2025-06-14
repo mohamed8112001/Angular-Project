@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="page-header">
+    <h2>Student Dashboard</h2>
+    <p>Welcome back! Here's your learning progress and available exams</p>
+  </div>
+
+  <!-- Student Statistics -->
+  <div class="stats-section" *ngIf="recentResults.length > 0">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon total">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ studentStats.totalExamsTaken }}</h3>
+          <p>Exams Taken</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon average">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ studentStats.averageScore }}%</h3>
+          <p>Average Score</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon passed">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ studentStats.passedExams }}</h3>
+          <p>Passed Exams</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon recent">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ formatDate(studentStats.lastExamDate) }}</h3>
+          <p>Last Exam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Results Section -->
+  <div class="recent-results-section" *ngIf="recentResults.length > 0">
+    <div class="section-header">
+      <h3>Recent Results</h3>
+      <a [routerLink]="['/student/results']" class="view-all-link">
+        <span>View All</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="results-grid">
+      <div *ngFor="let result of recentResults" class="result-card">
+        <div class="result-header">
+          <div class="exam-name">{{ result.examTitle || 'Untitled Exam' }}</div>
+          <div class="result-date">{{ formatDateTime(result.completedAt) }}</div>
+        </div>
+
+        <div class="result-body">
+          <div class="score-display">
+            <div class="score-circle" [class]="getScoreClass(result.percentage || 0)">
+              <span class="score-value">{{ result.percentage || 0 }}%</span>
+            </div>
+            <div class="score-details">
+              <div class="questions-answered">{{ result.correctAnswers || 0 }}/{{ result.totalQuestions || 0 }} correct
+              </div>
+              <div class="status-badge" [class]="getPassedClass(result.passed || false)">
+                <i class="fas" [class.fa-check]="result.passed" [class.fa-times]="!result.passed"></i>
+                {{ result.passed ? 'Passed' : 'Failed' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Available Exams Section -->
+  <div class="available-exams-section">
+    <h3>Available Exams</h3>
+
+    <div *ngIf="exams.length === 0" class="empty-state">
+      <i class="fas fa-clipboard-list"></i>
+      <h4>No Exams Available</h4>
+      <p>There are currently no active exams. Please check back later.</p>
+    </div>
+
+    <div *ngIf="exams.length > 0" class="exams-grid">
+      <div *ngFor="let exam of exams" class="exam-card">
+        <div class="exam-title">
+          <i class="fas fa-file-alt"></i>
+          {{ exam.title }}
+        </div>
+
+        <div class="exam-description">
+          {{ exam.description || 'No description available' }}
+        </div>
+
+        <div class="exam-meta">
+          <div class="exam-meta-item">
+            <i class="fas fa-clock"></i>
+            <span>{{ exam.duration }} minutes</span>
+          </div>
+          <div class="exam-meta-item">
+            <i class="fas fa-question-circle"></i>
+            <span>{{ exam.questions?.length || 0 }} questions</span>
+          </div>
+          <div class="exam-meta-item">
+            <i class="fas fa-percentage"></i>
+            <span>{{ exam.passingScore || 70 }}% to pass</span>
+          </div>
+        </div>
+
+        <div class="exam-footer">
+          <div class="exam-status" [class.inactive]="!exam.isActive">
+            <i class="fas" [class.fa-check-circle]="exam.isActive" [class.fa-times-circle]="!exam.isActive"></i>
+            <span>{{ exam.isActive ? 'Active' : 'Inactive' }}</span>
+          </div>
+          <a [routerLink]="['/student/take-exam', exam._id]" class="exam-button" [class.disabled]="!exam.isActive">
+            <i class="fas fa-play"></i>
+            Start Exam
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,251 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: #f7f9fc;
+    color: #1a202c;
+  }
+
+  h2 {
+    color: #5a67d8;
+  }
+
+  .dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .stat-card h4 {
+    margin: 0 0 0.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .stat-number.blue { color: #3b82f6; }
+  .stat-number.green { color: #22c55e; }
+  .stat-number.purple { color: #a855f7; }
+  .stat-number.orange { color: #f59e0b; }
+
+  .quick-actions {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .action-box, .activity-box {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .action-box h4,
+  .activity-box h4 {
+    margin-bottom: 1rem;
+  }
+
+  .action-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #f1f5f9;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    color: #1a202c;
+    font-weight: 500;
+  }
+
+  .action-link i {
+    margin-right: 0.75rem;
+  }
+
+  .action-link:hover{
+    background-color: #667eea;
+    color: white;
+  }
+ 
+  /* .primary-action{
+    background-color: #667eea;
+    color: white;
+  } */
+
+  
+  .recent-activity-list {
+    max-height: 200px; /* or any height you prefer */
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    margin: 0;
+    list-style: none;
+  }
+  
+  .recent-activity-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .recent-activity-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .recent-activity-list::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 3px;
+  }
+  
+  .recent-activity-list::-webkit-scrollbar-thumb:hover {
+    background-color: #a0aec0;
+  }
+
+  .results-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+  }
+
+  .results-section h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .results-table-container {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .results-table th {
+    background: #f8fafc;
+    color: #374151;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+  }
+
+  .results-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+  }
+
+  .result-row:hover {
+    background: #f8fafc;
+  }
+
+  .student-info .student-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+  }
+
+  .student-info .student-email {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .exam-title {
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  .score-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .score-badge.excellent { background: #d1fae5; color: #065f46; }
+  .score-badge.good { background: #dbeafe; color: #1e40af; }
+  .score-badge.average { background: #fef3c7; color: #92400e; }
+  .score-badge.poor { background: #fee2e2; color: #991b1b; }
+
+  .score-details {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .status-badge.passed {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .status-badge.failed {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .view-all-results {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline:hover {
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }

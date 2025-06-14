@@ -1,0 +1,97 @@
+<div class="register-container">
+  <div class="register-background">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+
+  <div class="register-content">
+    <div class="register-card">
+      <div class="register-header">
+        <div class="register-icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <h2 class="register-title">Create Account</h2>
+        <p class="register-subtitle">Join our exam platform and start your learning journey</p>
+      </div>
+
+      <form (submit)="authHandler($event)" [formGroup]="registerForm" class="register-form">
+        <div class="form-group">
+          <label for="username" class="form-label">
+            <i class="fas fa-user"></i>
+            Username
+          </label>
+          <input type="text" class="form-control" id="username" required formControlName="username"
+            placeholder="Enter your username (min 8 characters)"
+            [class.error]="getUsername.touched && getUsername.invalid">
+          <div *ngIf="getUsername.touched && getUsername.hasError('required')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Username is required
+          </div>
+          <div *ngIf="getUsername.hasError('minlength')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Username must be at least 8 characters
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">
+            <i class="fas fa-envelope"></i>
+            Email Address
+          </label>
+          <input type="email" class="form-control" id="email" required formControlName="email"
+            placeholder="Enter your email address" [class.error]="getEmail.touched && getEmail.hasError('required')">
+          <div *ngIf="getEmail.touched && getEmail.hasError('required')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+          <input type="password" class="form-control" id="password" required formControlName="password"
+            placeholder="Enter your password (min 6 characters)"
+            [class.error]="getPassword.touched && getPassword.hasError('required')">
+          <div *ngIf="getPassword.touched && getPassword.hasError('required')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Password is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role" class="form-label">
+            <i class="fas fa-user-tag"></i>
+            Account Type
+          </label>
+          <select class="form-control" id="role" formControlName="role">
+            <option value="student">Student - Take exams and view results</option>
+            <option value="admin">Teacher - Create and manage exams</option>
+          </select>
+        </div>
+
+        <div *ngIf="registerErrorMessage" class="alert alert-error">
+          <i class="fas fa-times-circle"></i>
+          {{ registerErrorMessage }}
+        </div>
+
+        <button type="submit" class="btn btn-register" [disabled]="!registerForm.valid">
+          <span class="btn-text">Create Account</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+        <div class="register-footer">
+          <p class="signin-link">
+            Already have an account?
+            <a [routerLink]="['/login']" class="link-primary">Sign In</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

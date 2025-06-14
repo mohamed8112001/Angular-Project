@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="page-header">
+        <h2>Manage Questions for Exam</h2>
+        <a [routerLink]="['/admin/exams']" class="btn btn-secondary">Back to Exams</a>
+    </div>
+
+    <div *ngIf="exam" class="exam-info">
+        <h3>{{ exam.title }}</h3>
+        <p>{{ exam.description }}</p>
+
+        <div class="questions-list">
+            <h4>Existing Questions ({{ questions.length }})</h4>
+            <div *ngIf="questions.length === 0" class="empty-state">
+                <p>No questions added yet. Add your first question below.</p>
+            </div>
+            <div *ngFor="let q of questions; let i = index" class="question-item">
+                <div class="question-header">
+                    <span class="question-number">{{ i + 1 }}.</span>
+                    <span class="question-text">{{ q.question }}</span>
+                </div>
+                <div class="question-options" *ngIf="q.options && q.options.length > 0">
+                    <div *ngFor="let option of q.options" class="option-item" [class.correct]="option.isCorrect">
+                        <i class="fas" [class.fa-check-circle]="option.isCorrect"
+                            [class.fa-circle]="!option.isCorrect"></i>
+                        {{ option.text }}
+                    </div>
+                </div>
+                <div class="question-actions">
+                    <button (click)="updateQuestion(q)" class="btn btn-sm btn-primary">Edit</button>
+                    <button (click)="deleteQuestion(q._id || q.id || '')" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="add-question-section">
+            <form (ngSubmit)="addQuestion()" #questionForm="ngForm" class="question-form">
+                <h4>Add New Question</h4>
+
+                <div class="form-group">
+                    <label for="questionText">Question Text *</label>
+                    <textarea [(ngModel)]="newQuestion.text" name="text" id="questionText" required class="form-control"
+                        placeholder="Enter your question here..." rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="questionType">Question Type *</label>
+                        <select [(ngModel)]="newQuestion.type" name="type" id="questionType" required
+                            class="form-control">
+                            <option value="multiple-choice">Multiple Choice</option>
+                            <option value="single-choice">Single Choice</option>
+                            <option value="true-false">True/False</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="questionPoints">Points *</label>
+                        <input [(ngModel)]="newQuestion.points" name="points" id="questionPoints" type="number" min="1"
+                            required class="form-control" placeholder="1">
+                    </div>
+                </div>
+
+                <div *ngIf="newQuestion.type === 'multiple-choice' || newQuestion.type === 'single-choice'"
+                    class="options-section">
+                    <div class="options-header">
+                        <label>Answer Options *</label>
+                        <button type="button" (click)="addOption()" class="btn btn-sm btn-outline">
+                            <i class="fas fa-plus"></i> Add Option
+                        </button>
+                    </div>
+
+                    <div *ngIf="!newQuestion.options || newQuestion.options.length === 0" class="empty-options">
+                        <p>No options added yet. Click "Add Option" to create answer choices.</p>
+                    </div>
+
+                    <div *ngFor="let opt of newQuestion.options ?? []; let i = index" class="option-row">
+                        <div class="option-input-group">
+                            <input [(ngModel)]="opt.text" name="optionText{{i}}" placeholder="Enter option text..."
+                                class="form-control option-text">
+                            <label class="checkbox-label">
+                                <input type="checkbox" [(ngModel)]="opt.isCorrect" name="optionCorrect{{i}}">
+                                <span class="checkmark"></span>
+                                Correct Answer
+                            </label>
+                            <button type="button" (click)="removeOption(i)" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="newQuestion.type === 'true-false'" class="true-false-section">
+                    <label>Correct Answer *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" [(ngModel)]="trueFalseAnswer" name="trueFalseAnswer" value="true">
+                            <span class="radio-mark"></span>
+                            True
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" [(ngModel)]="trueFalseAnswer" name="trueFalseAnswer" value="false">
+                            <span class="radio-mark"></span>
+                            False
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" [disabled]="!questionForm.form.valid" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Question
+                    </button>
+                    <button type="button" (click)="resetForm()" class="btn btn-secondary">
+                        <i class="fas fa-undo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="!exam" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading exam...</p>
+    </div>
+</div>

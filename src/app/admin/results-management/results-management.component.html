@@ -1,0 +1,85 @@
+<div class="results-container">
+    <h1 class="heading">Student Results</h1>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-users"></i>
+                    Total Students
+                </h3>
+            </div>
+            <div class="card-content">
+                <div class="stat blue">{{ totalStudents }}</div>
+                @if (totalStudents === 0) {
+                <p class="note">No students yet</p>
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Average Score
+                </h3>
+            </div>
+            <div class="card-content">
+                <div class="stat green">{{ averageScore }}%</div>
+                @if (averageScore === 0) {
+                <p class="note">No data available</p>
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-arrow-up-right-dots"></i>
+                    Pass Rate
+                </h3>
+            </div>
+            <div class="card-content">
+                <div class="stat purple">{{ passRate }}%</div>
+                @if (passRate === 0) {
+                <p class="note">No data available</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card full-width">
+        <div class="card-header">
+            <h3 class="card-title">Recent Exam Results</h3>
+        </div>
+
+        @if (results.length === 0) {
+        <div class="card-content center">
+            <i class="fas fa-chart-bar icon-large"></i>
+            <h3 class="subtitle">No Results Yet</h3>
+            <p class="note">Student exam results will appear here once exams are taken.</p>
+        </div>
+        }
+
+        @else {
+        <div class="exam-cards-container">
+            @for (result of results; track result.studentId) {
+            <div class="exam-card">
+<h4 class="exam-header">
+  <span>{{ result.examName }}</span>
+  <span
+    class="status-indicator-text"
+    [ngClass]="result.score >= 50 ? 'pass' : 'fail'">
+    {{ result.score >= 50 ? 'Passed' : 'Failed' }}
+  </span>
+</h4>                <p>Student ID: <span>{{ result.studentId }}</span></p>
+                <p>Completed: <span>{{ result.completedAt | date:'medium' }}</span></p>
+                <p>Score: <span>{{ result.score }}%</span></p>
+                <p>Questions: <span>{{ result.questions }}</span></p>
+               
+            </div>
+            }
+        </div>
+        }
+    </div>
+</div>

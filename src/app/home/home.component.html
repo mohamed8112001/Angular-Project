@@ -1,0 +1,49 @@
+<div class="home-hero-bg">
+  <div class="home-hero-card">
+    <h1 class="home-hero-title">Welcome to <span>EXAM Portal</span></h1>
+    <p class="home-hero-desc">Your gateway to smart exam management.<br>Choose your role to continue:</p>
+    <div class="home-hero-buttons">
+      <a [routerLink]="['/login',0]" class="home-hero-btn admin-btn" style="text-decoration: none;">Teacher</a>
+      <a [routerLink]="['/login',1]" class="home-hero-btn student-btn" style="text-decoration: none;">Student</a>
+    </div>
+  </div>
+</div>
+<section class="features-section">
+      <div class="container">
+        <h2 class="section-title text-center">Features</h2>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3 class="feature-title">Varied Question Types</h3>
+            <p class="feature-description">
+              Support for multiple-choice, single-choice, and true/false questions
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h3 class="feature-title">Timed Exams</h3>
+            <p class="feature-description">
+              Set time limits for exams to simulate real testing environments
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Instant Results</h3>
+            <p class="feature-description">
+              Get immediate feedback and detailed analysis of your performance
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">Secure Platform</h3>
+            <p class="feature-description">
+              Role-based access control ensures data security and privacy
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>

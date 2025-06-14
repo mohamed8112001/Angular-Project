@@ -1,0 +1,60 @@
+<div *ngIf="!isHiddenPage()">
+
+  <nav *ngIf="!isPublicPage()" class="navbar modern-navbar navbar-expand-lg" style="min-height:48px;">
+    @if(isStudentPage()){
+    <div class="container">
+      <a class="navbar-brand brand-text" [routerLink]="['/student/dashboard']">
+        <span class="brand-name">EXAM</span>
+        <span class="brand-tagline">Student Portal</span>
+      </a>
+      <ul class="navbar-nav ms-auto public-nav">
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/']">Logout</a>
+        </li>
+      </ul>
+    </div>
+    }@else{
+    <div class="container">
+      <a class="navbar-brand brand-text" [routerLink]="['/admin/dashboard']">
+        <span class="brand-name">EXAM</span>
+        <span class="brand-tagline">Admin Panel</span>
+      </a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/admin/dashboard']">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/admin/exams']">Manage Exams</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/admin/question-form']">Manage Questions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/admin/results']">Manage Results</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" [routerLink]="['/']">Log out</a>
+        </li>
+      </ul>
+    </div>
+    }
+
+  </nav>
+
+  <nav *ngIf="isPublicPage()" class="navbar modern-navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand brand-text" [routerLink]="['/']">
+        <span class="brand-name">EXAM</span>
+        <span class="brand-tagline">Portal</span>
+      </a>
+      <!-- <ul class="navbar-nav ms-auto public-nav">
+      <li class="nav-item">
+        <a class="nav-link nav-link-modern">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-modern">Register</a>
+      </li>
+    </ul> -->
+    </div>
+  </nav>
+</div>

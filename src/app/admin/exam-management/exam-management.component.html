@@ -1,0 +1,51 @@
+<div class="container slide-up">
+  <div class="page-header">
+    <h2>Exam Management</h2>
+    <a routerLink="/admin/exams/create" class="button">Create New Exam</a>
+  </div>
+
+  <div class="exams-grid">
+    <div *ngFor="let exam of exams" class="exam-card">
+      <div class="exam-header">
+        <h3>{{exam.title}}</h3>
+
+      </div>
+
+      <p class="exam-description">{{exam.description}}</p>
+
+      <div class="exam-stats">
+        <div class="stat">
+          <span class="stat-label">Questions</span>
+          <span class="stat-value">{{exam.questions.length}}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Duration</span>
+          <span class="stat-value">{{exam.duration}} mins</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Pass Score</span>
+          <span class="stat-value">{{exam.passingScore}}%</span>
+        </div>
+      </div>
+
+      <div class="exam-actions">
+        <div class="action-row">
+          <a [routerLink]="['/admin/exams', exam._id || exam.id, 'edit']" class="button">
+            Edit
+          </a>
+          <button class="button error" (click)="deleteExam(exam._id || exam.id || '')">
+            Delete
+          </button>
+        </div>
+        <div class="action-row">
+          <a [routerLink]="['/admin/question-form', exam._id || exam.id]" class="button button-outline">Manage
+            Questions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="exams.length === 0" class="empty-state">
+    <p>No exams found. Click "Create New Exam" to get started.</p>
+  </div>
+</div>

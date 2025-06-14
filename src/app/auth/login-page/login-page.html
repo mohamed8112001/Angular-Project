@@ -1,0 +1,74 @@
+<div class="login-container">
+  <div class="login-background">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </div>
+
+  <div class="login-content">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="role-icon">
+          <i class="fas" [class.fa-chalkboard-teacher]="id==='0'" [class.fa-user-graduate]="id==='1'"></i>
+        </div>
+        <h2 class="login-title">{{id==='0' ? "Teacher Portal" : "Student Portal"}}</h2>
+        <p class="login-subtitle">{{id==='0' ? "Manage exams and track student progress" : "Take exams and view your
+          results"}}</p>
+      </div>
+
+      <form (submit)="authHandler($event)" [formGroup]="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email" class="form-label">
+            <i class="fas fa-envelope"></i>
+            Email Address
+          </label>
+          <input type="email" class="form-control" id="email" required formControlName="email"
+            placeholder="Enter your email address" [class.error]="getEmail.touched && getEmail.hasError('required')">
+          <div *ngIf="getEmail.touched && getEmail.hasError('required')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+          <input type="password" class="form-control" id="password" required formControlName="password"
+            placeholder="Enter your password" [class.error]="getPassword.touched && getPassword.hasError('required')">
+          <div *ngIf="getPassword.touched && getPassword.hasError('required')" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            Password is required
+          </div>
+        </div>
+
+        <div *ngIf="loginErrorMessage" class="alert alert-error">
+          <i class="fas fa-times-circle"></i>
+          {{ loginErrorMessage }}
+        </div>
+
+        <button type="submit" class="btn btn-login" [disabled]="!loginForm.valid">
+          <span class="btn-text">Sign In</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+        <div class="login-footer">
+          <p class="signup-link">
+            Don't have an account?
+            <a [routerLink]="['/register']" class="link-primary">Create Account</a>
+          </p>
+
+          <div class="role-switch">
+            <p>Looking for a different portal?</p>
+            <a [routerLink]="['/login', id==='0' ? '1' : '0']" class="switch-role">
+              Switch to {{id==='0' ? 'Student' : 'Teacher'}} Portal
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

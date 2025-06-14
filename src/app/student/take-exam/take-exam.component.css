@@ -1,0 +1,175 @@
+.exam-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.10);
+  padding: 32px 24px;
+}
+
+.exam-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 2rem;
+  color: #7c3aed;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.exam-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.question-card {
+  background: #fff;
+  border: 1.5px solid #7c3aed;
+  border-radius: 12px;
+  padding: 20px 18px 16px 18px;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+.question-card h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.question-text {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: #5b21b6;
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-label {
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 0 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  background: none;
+}
+
+.option-label input[type="radio"] {
+  accent-color: #7c3aed;
+  margin-right: 10px;
+}
+
+.option-label:hover {
+  background: #f3f4f6;
+}
+
+.submit-btn {
+  display: block;
+  width: 100%;
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #5b21b6;
+}
+
+/* Score Modal Styles */
+.score-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(60, 0, 100, 0.18);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.score-modal {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(124,58,237,0.18);
+  padding: 4.5rem 4rem 3.5rem 4rem;
+  min-width: 600px;
+  max-width: 98vw;
+  text-align: center;
+  animation: pop-in 0.25s cubic-bezier(.4,2,.6,1) 1;
+}
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.score-modal h2 {
+  color: #7c3aed;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.score-text {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+.score-number {
+  color: #7c3aed;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.close-modal-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 18px 48px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.10);
+}
+.close-modal-btn:hover {
+  background: #5b21b6;
+}
+@media (max-width: 700px) {
+  .score-modal {
+    min-width: 95vw;
+    padding: 2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .score-modal h2 {
+    font-size: 1.5rem;
+  }
+  .score-text {
+    font-size: 1.1rem;
+  }
+  .score-number {
+    font-size: 2rem;
+  }
+  .close-modal-btn {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+}
+@media (max-width: 600px) {
+  .exam-container {
+    padding: 16px 4px;
+  }
+  .exam-title {
+    font-size: 1.3rem;
+  }
+  .question-card {
+    padding: 12px 6px 10px 6px;
+  }
+}

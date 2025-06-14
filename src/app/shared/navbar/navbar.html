@@ -1,0 +1,58 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <a [routerLink]="['/']" class="brand-link">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EXAM Portal</span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" *ngIf="isLoggedIn">
+            <!-- Admin Menu -->
+            <div class="navbar-nav" *ngIf="isAdmin()">
+                <a [routerLink]="['/admin/dashboard']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a [routerLink]="['/admin/exams']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-file-alt"></i> Manage Exams
+                </a>
+                <a [routerLink]="['/admin/results']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-chart-bar"></i> Results
+                </a>
+            </div>
+
+            <!-- Student Menu -->
+            <div class="navbar-nav" *ngIf="isStudent()">
+                <a [routerLink]="['/student/dashboard']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a [routerLink]="['/student/exam-result']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-chart-line"></i> My Results
+                </a>
+                <a [routerLink]="['/student/results']" class="nav-link" routerLinkActive="active">
+                    <i class="fas fa-trophy"></i> All Results
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-actions">
+            <div *ngIf="!isLoggedIn" class="auth-buttons">
+                <a [routerLink]="['/login', 0]" class="btn btn-outline">Login as Teacher</a>
+                <a [routerLink]="['/login', 1]" class="btn btn-primary">Login as Student</a>
+            </div>
+
+            <div *ngIf="isLoggedIn" class="user-menu">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="username">{{ username || 'User' }}</span>
+                    <span class="role-badge" [class.admin]="isAdmin()" [class.student]="isStudent()">
+                        {{ userRole || 'user' }}
+                    </span>
+                </div>
+                <button (click)="logout()" class="btn btn-outline logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

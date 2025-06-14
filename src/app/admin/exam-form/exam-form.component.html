@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="page-header">
+    <h2>{{ isEditMode ? 'Edit Exam' : 'Create New Exam' }}</h2>
+    <button type="button" (click)="cancel()" class="btn btn-secondary">
+      <i class="fas fa-arrow-left"></i> Back to Exams
+    </button>
+  </div>
+
+  <div class="exam-form-card">
+    <form (ngSubmit)="onSubmit()" #examForm="ngForm" class="exam-form">
+      <div class="form-section">
+        <h3>Basic Information</h3>
+
+        <div class="form-group">
+          <label for="title" class="form-label">Exam Title *</label>
+          <input id="title" [(ngModel)]="exam.title" name="title" required class="form-control"
+            placeholder="Enter exam title..." #titleInput="ngModel" />
+          <div *ngIf="titleInput.invalid && titleInput.touched" class="error-message">
+            Exam title is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" [(ngModel)]="exam.description" name="description" class="form-control" rows="4"
+            placeholder="Enter exam description..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Exam Settings</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="duration" class="form-label">Duration (minutes) *</label>
+            <input id="duration" type="number" [(ngModel)]="exam.duration" name="duration" required min="1" max="300"
+              class="form-control" placeholder="60" #durationInput="ngModel" />
+            <div *ngIf="durationInput.invalid && durationInput.touched" class="error-message">
+              Duration must be between 1 and 300 minutes
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="passingScore" class="form-label">Passing Score (%) *</label>
+            <input id="passingScore" type="number" [(ngModel)]="exam.passingScore" name="passingScore" required min="0"
+              max="100" class="form-control" placeholder="70" #passingScoreInput="ngModel" />
+            <div *ngIf="passingScoreInput.invalid && passingScoreInput.touched" class="error-message">
+              Passing score must be between 0 and 100
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="exam.isActive" name="isActive" />
+            <span class="checkmark"></span>
+            <span class="checkbox-text">
+              <strong>Active Exam</strong>
+              <small>Students can take this exam when it's active</small>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!examForm.form.valid" class="btn btn-primary">
+          <i class="fas" [class.fa-plus]="!isEditMode" [class.fa-save]="isEditMode"></i>
+          {{ isEditMode ? 'Update Exam' : 'Create Exam' }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn btn-secondary">
+          <i class="fas fa-times"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

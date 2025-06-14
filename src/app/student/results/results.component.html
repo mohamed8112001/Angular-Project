@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="page-header">
+    <h2>My Exam Results</h2>
+    <p>Track your progress and performance across all exams</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading your results...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h3>Unable to Load Results</h3>
+    <p>{{ error }}</p>
+    <button (click)="loadStudentResults()" class="btn btn-primary">
+      <i class="fas fa-redo"></i> Try Again
+    </button>
+  </div>
+
+  <!-- Results Content -->
+  <div *ngIf="!loading && !error">
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon total">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ totalExamsTaken }}</h3>
+          <p>Total Exams</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon average">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ averageScore }}%</h3>
+          <p>Average Score</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon passed">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ passedExams }}</h3>
+          <p>Passed Exams</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon best">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ bestScore }}%</h3>
+          <p>Best Score</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="results.length === 0" class="empty-state">
+      <i class="fas fa-clipboard-list"></i>
+      <h3>No Results Yet</h3>
+      <p>You haven't taken any exams yet. Start by taking an exam from your dashboard.</p>
+      <a [routerLink]="['/student/dashboard']" class="btn btn-primary">
+        <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+      </a>
+    </div>
+
+    <!-- Results Table -->
+    <div *ngIf="results.length > 0" class="results-section">
+      <h3>Detailed Results</h3>
+      
+      <div class="results-table-container">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Score</th>
+              <th>Questions</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Time Taken</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let result of results" class="result-row">
+              <td class="exam-info">
+                <div class="exam-title">{{ result.examTitle || 'Untitled Exam' }}</div>
+              </td>
+              <td class="score-cell">
+                <div class="score-badge" [class]="getScoreClass(result.percentage)">
+                  {{ result.percentage }}%
+                </div>
+                <div class="score-details">
+                  {{ result.correctAnswers }}/{{ result.totalQuestions }}
+                </div>
+              </td>
+              <td class="questions-cell">
+                {{ result.totalQuestions }}
+              </td>
+              <td class="status-cell">
+                <span class="status-badge" [class]="getPassedClass(result.passed)">
+                  <i class="fas" [class.fa-check]="result.passed" [class.fa-times]="!result.passed"></i>
+                  {{ result.passed ? 'Passed' : 'Failed' }}
+                </span>
+              </td>
+              <td class="date-cell">
+                {{ formatDate(result.completedAt) }}
+              </td>
+              <td class="time-cell">
+                {{ formatDuration(result.timeTaken || 0) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
